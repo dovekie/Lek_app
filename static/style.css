@@ -1,0 +1,225 @@
+/*css is awesome!*/
+
+.navbar {
+	position: fixed;
+	background-color: #3668A5;
+	border-color: white;
+	font-family: 'Philosopher', sans-serif;
+}
+
+.navbar.navbar-inverse.navbar-fixed-top a {
+	color: #EBEBEB;
+}
+
+#main_page_body {
+	/*padding-top: 70px;*/
+	padding-bottom: 4em;
+}
+
+.highlight {
+	background-image: url("feather.gif");
+	background-size: 1.8em 1em;
+	background-repeat: no-repeat;
+}
+
+#bird_counter {
+	color: white;
+}
+
+.taxon_family {
+	text-indent: 1em;
+}
+
+.sci_name_span {
+	font-style: italic;
+}
+
+#map-canvas { 
+	height: 700px;
+}
+
+.jumbotron {
+	height: 700px;
+    background-image: url("snow_geese2.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	font-family: 'Philosopher', sans-serif;
+	text-align: center;
+	color: #EBEBEB;
+}
+
+.jumbotron h1 {
+	font-size: 200px;
+	text-shadow: 4px 4px 6px #3668A5;
+}
+
+.title {
+	margin-top: 150px;
+}
+
+h3.subtitle {
+	font-style: bold;
+	font-size: 200%;
+	text-shadow: 4px 4px 6px #3668A5;
+}
+
+.taxon_order {
+	font-size: 35px;
+	font-style: bold;
+}
+
+.taxon_family {
+	font-size: 70%;
+	font-style: bold;
+
+}
+
+.species_span {
+	font-size: 80%;
+	padding-left: 2em;
+	font-family: 'PT Sans', sans-serif;
+
+}
+
+.search-form-background {
+	padding-top: 70px;
+	background-image: url("snow_geese2.png");
+}
+
+.glyphicon {
+	font-size: 100%;
+	padding-left: 0.4em;
+	color: gray;
+
+}
+
+span.species_info .glyphicon {
+	font-size: 75%;
+	padding-left: 0.4em;
+	color: gray;
+
+}
+
+.dropdown-menu {
+	background-color: #3668A5;
+}
+
+.navbar.navbar-inverse.navbar-fixed-top a:hover {
+	background-color: #7295c0;
+}
+
+.dropdown-menu>li>a:hover {
+	font-size: 105%;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+	background-color: #7295c0;
+}
+
+.footer {
+	padding-top: 20px;
+	padding-bottom: 10px;
+	padding-left: 3em;
+	/*height: 100%;*/
+	background-color: #3668A5;
+	color: #EBEBEB;
+	font-family: 'Philosopher', sans-serif;
+}
+
+.instructions {
+	font-family: 'Philosopher', sans-serif;
+	padding-bottom: 3em;
+	padding-left: -10px;
+}
+
+#gallery {
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+
+.spuh {
+	font-size: 75%;
+}
+
+.footer#alt_foot {
+	position: absolute;
+    bottom: 0;
+    width: 103%;
+}
+
+.footer a {
+	color: #5CDBF9;
+}
+
+.saved {
+	padding-top: 70px;
+	font-family: 'Philosopher', sans-serif;
+	/*margin-left: 3em;*/
+	background-image: url("snow_geese2.png");
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.search_box {
+	background-color: rgba(255, 255, 255, 0.9);
+	padding-bottom: 70px;
+	font-family: 'Philosopher', sans-serif;
+	min-height: 1000px;
+}
+
+.form_saved {
+	padding-top: 2em;
+	padding-bottom: 5em;
+}
+
+.form_saved label {
+	padding-left: 12em;
+	font-family: 'PT Sans', sans-serif;
+	font-weight: normal;
+	font-size: 150%;
+}
+
+.bird_picture {
+	float: left;
+	margin: 10px;
+}
+
+.bird_picture img {
+	max-height: 200px;
+}
+
+.saved_search .search_box .options {
+	padding-left: 3em;
+}
+
+.thumbnail {
+	height: 333px;
+}
+
+#seach-form-foreground {
+	padding-top: 70px;
+	background-image: url("snow_geese2.png");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height: 2000px;
+}
+
+.form-search {
+	padding-left: 2em;
+}
+
+#advanced_search, #tickboxes {
+	padding-top: 1em;
+	padding-left: 3em;
+}
+
+#advanced_search_form {
+	padding-left: 6em;
+    padding-top: 3em;
+}
+
+#advanced_search_form label {
+    font-family: 'PT Sans', sans-serif;
+	font-weight: normal;
+	font-size: 150%;
+}

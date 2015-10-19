@@ -1,0 +1,11 @@
+env
+resources
+*.pyc
+*.db
+*.sh
+sos.py
+misc/
+project/
+bootstrap.css
+jquery.js
+*.ini

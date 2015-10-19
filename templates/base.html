@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+    <script src="static/jquery.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="static/jquery.quicksearch.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/style.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Philosopher:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <title>Lek</title>
+</head>
+
+<body>
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <!-- <img src="/static/logo.png"> --> <!-- logo to be added later -->
+              <a class="navbar-brand" href="/">Lek: Your Life List in the Cloud</a>
+          </div>
+
+          <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
+                  <li>
+                      <a href="#">Bird Count: <span id="bird_counter">
+                        {% if 'bird_count' in session.keys() %}{{session['bird_count']}}
+                        {% else %}0
+                        {% endif %}</span></a>
+                  </li>
+  <!--                 <li>
+                    <a href="/map">Map</a>
+                  </li> -->
+                  <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Search" id="simple-search">
+                    </div>
+                    <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+                  </form>
+                  <li class="hoverable">
+                      <a href="/search">Advanced Search</a>
+                  </li>
+                  <li class="hoverable">
+                    <a href="/show_all">Show All</a>
+                  </li>
+                  {% if 'username' in session.keys() %}
+                  <li class="dropdown hoverable">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome, {{session["username"]}}
+                        <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu" >
+                          <li>
+                            <a class="menu-item" href="/saved_searches">Saved Searches</a>
+                          </li>
+                          <li>
+                            <a href="/lifelist">My Life List</a>
+                          </li>
+                          <li>
+                            <a class="menu-item" href="/bird_gallery">Bird Gallery</a>
+                          </li>
+                          <li>
+                              <a class="menu-item" href="/logout">Logout</a>
+                          </li>
+                      </ul>
+                  </li>
+
+                  {% else %}
+                  <li>
+                      <a href="/lek_login">Log In</a>
+                  </li>
+                  <li>
+                      <a href="/login">Log In with Twitter</a>
+                  </li>
+
+                  {% endif %}
+              </ul>
+          </div>
+      </div>
+  </div>
+
+
+
+
+    {% block body %}
+    PAGE GOES HERE
+    {% endblock %}
+<div class="footer" id="main_foot">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4" id="faircloth">Gill, F &amp; D Donsker (Eds). 2014. IOC World Bird List (v 4.1). doi: <a href="http://doi.org/10.14344/IOC.ML.4.1">10.14344/IOC.ML.4.1</a>.
+      </div>
+      <div class="col-sm-4" id="ebird">eBird. 2012. eBird: An online database of bird distribution and abundance [web application]. eBird, Ithaca, New York. Available: <a href="http://www.ebird.org">http://www.ebird.org</a>.</div>
+      <div class="col-sm-4" id="arkive">ARKive API. 2010. Wildscreen Arkive. <a href="https://www.arkive.org">https://www.arkive.org</a>.</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4" id="copything">All code and content on this page, unless otherwise specified, is copyright Sarah Frost 2015</div>
+      <div class="col-sm-4 col-sm-offset-4" id="ack">The author gratefully acknowledges the instructors and students at Hackbright Academy, who made this project possible. All remaining errors are the sole responsibility of the author.</div>
+    </div>
+    </div>
+</div>
+
+
+<script src="static/birdscript.js"></script>
+</body>
+</html>

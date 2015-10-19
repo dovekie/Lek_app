@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="saved container-fluid">
+		<div class="row saved_search">
+			<div class="search_box col-md-6 col-md-offset-3">
+					<h2>Search for birds... </h2>
+				{% for this_search in search_list %}
+					{% for key, value in this_search.iteritems() %}
+							<form action="/search" class="form_saved" method="POST">
+								<input hidden name="{{key}}", value="{{value}}">
+							<p>{% if value != "all" and key != "save_this" and key != "fuzzy" %}
+								{% if key == "select_spuh" %}
+									<label for="{{key}}">... that are {{SPUH_EQUIVALENTS[value]}}</label>
+								{% elif key == "select_order" %}
+									<label for="{{key}}">... in the Order {{value}}</label>
+								{% elif key == "select_family" %}
+									<label for="{{key}}">... in the Family {{value}}</label>
+								{% elif key == "select_region" %}
+									<label for="{{key}}">... in {{REGION_CODES[value]}}</label>
+								{% elif key == "which_birds" and value == "my_birds" %}
+									<label for="{{key}}">... that I have seen.</label>
+								{% elif key == "which_birds" and value == "not_my_birds" %}
+									<label for="{{key}}">... that I have not seen.</label>
+								{% else %}
+									<span></span>
+								{% endif %}
+							{% endif %}</p>
+					{% endfor %}
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3">
+									<input type="submit" class="btn btn-primary btn-block rerun-button" value="Run this search">
+								</div>
+							</div>
+							<div class="options row">
+								<div class="col-md-3 col-md-offset-3 default_set_button"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Make this your default</div>
+								<div class="col-md-4 delete_save_search"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete this search</div>
+							</div>
+						</form>
+				{% endfor %}
+			<h3 id="new_search"><a href="/search">... Or start a new search</a></h3>
+		</div>
+	</div>
+</div>
+{% endblock %}
