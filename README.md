@@ -1,6 +1,6 @@
 # Lek Life List
 
-Lek is a cloud-enabled, platform-agnostic app which allows birdwatchers to store and update their life lists from anywhere, anytime. Lek is powered by Python, Flask, JQuery, and SQLite.
+Lek is a cloud-enabled, platform-agnostic app which allows birdwatchers to store and update their life lists from anywhere, anytime. Lek is powered by Python, Flask, JQuery, and PostgreSQL.
 
   - Log in with Twitter
   - Click a bird to add it to your life list
@@ -10,7 +10,7 @@ Lek is a cloud-enabled, platform-agnostic app which allows birdwatchers to store
   - Set your default
 
 ### Version
-0.9
+0.9.1
 
 ### Data
 
@@ -35,7 +35,9 @@ Lek is open source is open source with a [public repository](https://github.com/
 
  - Write more tests
  - Implement mapping and location services
- - Migrate to Postgres
+ - Implement custom lists
+ - Implement list sharing
+ - Implement list exporting
  - Deploy!
 
 
