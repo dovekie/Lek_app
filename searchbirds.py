@@ -51,55 +51,49 @@ def birdsearch(this_user_id = None, bird_limit = "all", spuh = "all", order="all
 
 	if order !="all": 
 		print "order ", order, type(order)
-		q = q.filter_by(order = order)
+		q = q.filter_by(sp_order = order)
 
 	if family != "all":
-		q = q.filter_by(family = family)
+		q = q.filter_by(sp_family = family)
 
     # search inside the region field
 	if region != "all":
 		print "region ", region
 		q = q.filter(Bird.region.like('%'+region+'%'))
 
-    # put the final query in order by taxon ID
-	q = q.order_by(Bird.taxon_id)
+    # put the final query in order by taxon ID but this doesn't work anymore
+	#q = q.order_by(Bird.taxon_id)
 
 	##### Now the query that has been built is run several times.
 
-	# Run once to get a list of bird objects
-	birds = q.all()
+	# Run once to get a list of bird objects. This is in order but the order is not maintained.
+	birds = q.order_by(Bird.taxon_id).all()
 
 	# Run once to get a list of family objects
-	families_objects = q.group_by(Bird.family).all()
+	#families_objects = q.group_by(Bird.sp_family).with_entities(Bird.sp_family).all()
 
 	# Run once to get a list of order objects
-	orders_objects = q.group_by(Bird.order).all()
+	orders_objects = q.group_by(Bird.sp_order).with_entities(Bird.sp_order).all()
 
 	# generate a list of orders as ascii strings.
-	orders_list = [order.order.encode('ascii', 'ignore') for order in orders_objects]
+	orders_list = [order.sp_order.encode('ascii', 'ignore') for order in orders_objects]
 
 	# begin the big dictionary of birds with the orders (strings) as keys.
 	birds_dict = {order: {} for order in orders_list}
 
-	# add families as ascii strings to the big dictionary of birds
-	for family in families_objects:
-		birds_dict[family.order.encode('ascii', 'ignore')][family.family.encode('ascii', 'ignore')] = {}
+	# for each order, query for the birds with that order. Group by family and add to dict
+	for order in birds_dict.keys():
+		families_list = q.filter_by(sp_order = order).group_by(Bird.sp_family).with_entities(Bird.sp_family).all()
+		birds_dict[order] = {family[0].encode('ascii', 'ignore'): {} for family in families_list}
 
 	# add birds to the big dictionary of birds.
 	# Pull relevant data out of each bird object.
 	for bird in birds:
-		birds_dict[bird.order.encode('ascii', 'ignore')][bird.family.encode('ascii', 'ignore')][bird.taxon_id.encode('ascii', 'ignore')] = {'order': bird.order.encode('ascii', 'ignore'), 
-																												  'family': bird.family.encode('ascii', 'ignore'), 
+		birds_dict[bird.sp_order.encode('ascii', 'ignore')][bird.sp_family.encode('ascii', 'ignore')][bird.taxon_id.encode('ascii', 'ignore')] = {'order': bird.sp_order.encode('ascii', 'ignore'), 
+																												  'family': bird.sp_family.encode('ascii', 'ignore'), 
 																												  'sci_name': bird.sci_name, 
 																												  'common_name': bird.common_name,
 																												  'region': bird.region}
-
-	# FOR FUTURE REFERENCE:
-	# for order in orders_list:
-	# 	for family in birds_dict[order].keys():
-	# 		print ">>>", family
-	# 		for bird in birds_dict[order][family].keys():
-	# 			print ">>> >>>", bird
 
 	return {"birds_dict": birds_dict,
 			"orders" : orders_list}
