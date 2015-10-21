@@ -549,13 +549,13 @@ def oauth_authorized(resp):
     flash('You were signed in as %s' % session['username'])
     return redirect(next_url)
 
-@app.route('/signup', methods=["GET"])
-def show_signup():
-    """
-    Render the signup page
-    """
+# @app.route('/signup', methods=["GET"])
+# def show_signup():
+#     """
+#     Render the signup page
+#     """
 
-    return render_template("signup.html")
+#     return render_template("signup.html")
 
 @app.route('/signup', methods=["POST"])
 def process_signup():
@@ -566,18 +566,19 @@ def process_signup():
     """
 
     username = request.form.get("username")
-    password = request.form.get("password")
     email = request.form.get("email")
-                                            # FIXME to check for preexisting usernames
-    new_user = User(username=username,      # create a User object
-                    password=password,
-                    email=email,
-                    bird_count=0)
-    db.session.add(new_user)                # add the new user to the database
-    db.session.commit()
-    flash('New account created! Please log in.')
 
-    return redirect('/lek_login', code=307)
+    print "I'm the signup form!", username, email
+                                            
+    # new_user = User(username=username,      # create a User object
+    #                 password=password,
+    #                 email=email,
+    #                 bird_count=0)
+    # db.session.add(new_user)                # add the new user to the database
+    # db.session.commit()
+    
+
+    return None # redirect? Shouldn't need redirect.
 
 @app.route('/logout')
 def logout():

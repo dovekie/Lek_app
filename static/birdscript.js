@@ -221,9 +221,20 @@ $( document ).ready( function() {
 	var isNew = $( "#new-user" );
 	if(isNew.attr("name") === "True") {
 		console.log("I spotted a new user!");
+		$( "#newUserDialog").modal();
 	} else {
 		console.log("No new user spotted. :(");
 	}
+});
+
+$( document ).ready( function() {
+	console.log("User info button click handler is go!");
+	$( "#user-data-button" ).click( function(evt) {
+		evt.preventDefault();
+		console.log($( "#username-field" ).val());
+		console.log($( "#email-field" ).val());
+	});
+
 });
 
 // Searching!

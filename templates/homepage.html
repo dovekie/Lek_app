@@ -18,6 +18,47 @@
         {% endfor %}
     {% endwith %}
 <div class="container" id="main_page_body">
+
+<div id="newUserDialog" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Hello! Welcome to Lek</h4>
+      </div>
+      <div class="modal-body">
+        <p>Would you like to add some information to your account?</p>
+        <p>(You can always add or change this information later)</p>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No, thank you</button>
+    		<form class="form-signup" action="signup" method="POST">
+		        <div class="form-group">
+		            <label for="username-field" class="sr-only">username</label>
+		            <input id="username-field"
+		            	   type="text"
+		                   name="username"
+		                   class="form-control input-lg"
+		                   placeholder="Username">
+		        </div>
+		        <div class="form-group">
+		            <label for="email-field" class="sr-only">Email Address</label>
+		            <input id="email-field"
+		            	   type="email"
+		                   name="email"
+		                   class="form-control input-lg"
+		                   placeholder="Email Address">
+		        </div>
+        		<button id="user-data-button" type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
+		    </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+
+  </div>
+</div>
+
 {% if birds_nest == {} %}
 <h3>No birds found. <a href="/search">Search again?</a></h3>
 {% else %}
