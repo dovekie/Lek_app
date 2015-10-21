@@ -59,3 +59,13 @@ REGION_CODES = {  "NA" : "North America",
                   "AN" : "Antarctica",
                   "So. Cone" : "Southern Cone"
 }
+
+# hard coding a list of orders
+
+TAXA_ORDER = ['Tinamiformes', 'Struthioniformes', 'Rheiformes', 'Casuariiformes', 'Apterygiformes', 'Anseriformes', 
+              'Galliformes', 'Gaviiformes', 'Sphenisciformes', 'Procellariiformes',  'Podicipediformes',
+              'Phoenicopteriformes', 'Phaethontiformes', 'Ciconiiformes', 'Pelecaniformes', 'Suliformes', 'Accipitriformes',
+              'Otidiformes', 'Mesitornithiformes', 'Cariamiformes', 'Eurypygiformes', 'Gruiformes', 'Charadriiformes', 
+              'Pterocliformes', 'Columbiformes', 'Opisthocomiformes', 'Musophagiformes', 'Cuculiformes', 'Strigiformes', 
+              'Caprimulgiformes', 'Apodiformes', 'Coliiformes', 'Trogoniformes', 'Leptosomiformes', 'Coraciiformes',
+              'Bucerotiformes', 'Piciformes', 'Falconiformes', 'Psittaciformes', 'Passeriformes']

@@ -531,6 +531,7 @@ def oauth_authorized(resp):
 
     # If no users matches, add this new user to the database.
     if user_object is None:
+        session['new_user': True]
         new_user = User(username = resp['screen_name'])     # FIXME to ask the user for more information if it's their first time.
         db.session.add(new_user)
         db.session.commit()
@@ -575,42 +576,6 @@ def process_signup():
     flash('New account created! Please log in.')
 
     return redirect('/lek_login', code=307)
-
-# OLD LOGIN ROUTES
-@app.route('/lek_login', methods=["GET"])
-def show_login():
-    """
-    Render the login page
-    """
-
-    return render_template("login.html")
-
-@app.route('/lek_login', methods=["POST"])
-def process_login():
-    """
-    Login form input. Checks the username and password against the database
-    Then either sets the session variables or tells the user to try again
-    """
-
-    username_input = request.form.get("username")
-    password_input = request.form.get("password")
-
-    try: 
-        user_object = User.query.filter(User.username == username_input, User.password == password_input).first()
-        user_id_input = user_object.user_id
-    except AttributeError:
-        user_id_input = "guest"
-
-    if user_id_input is "guest":
-        flash('No such user found. Create a new account or log in.')
-        return redirect('/login')
-
-    else:
-        session['username'] = username_input
-        session['password'] = password_input
-        session['user_id']  = user_id_input
-
-        return redirect('/')
 
 @app.route('/logout')
 def logout():

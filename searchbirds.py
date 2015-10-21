@@ -1,4 +1,5 @@
 from model import User, Bird, Observation, connect_to_db, db
+from constants import TAXA_ORDER
 import pprint
 
 def birdsearch(this_user_id = None, bird_limit = "all", spuh = "all", order="all", family = "all", region = "all", other=None):
@@ -75,8 +76,12 @@ def birdsearch(this_user_id = None, bird_limit = "all", spuh = "all", order="all
 	# Run once to get a list of order objects
 	orders_objects = q.group_by(Bird.sp_order).with_entities(Bird.sp_order).all()
 
-	# generate a list of orders as ascii strings.
-	orders_list = [order.sp_order.encode('ascii', 'ignore') for order in orders_objects]
+	# generate a set of orders as ascii strings.
+	orders_set = set([order.sp_order.encode('ascii', 'ignore') for order in orders_objects])
+
+	# Use set to select a subset of orders from a list
+	# this allows the taxa to display in the correct sequence.
+	orders_list = [order for order in TAXA_ORDER if order in orders_set]
 
 	# begin the big dictionary of birds with the orders (strings) as keys.
 	birds_dict = {order: {} for order in orders_list}
