@@ -101,6 +101,8 @@ def index():
     # Display their custom page
     if this_user_id is None:
         print "Homepage rendering with no user default: User not logged in."
+        session.clear()
+        session['new_user'] = True
         bird_dict = birdsearch()
     else:
         # Database query
@@ -531,7 +533,7 @@ def oauth_authorized(resp):
 
     # If no users matches, add this new user to the database.
     if user_object is None:
-        session['new_user': True]
+        session['new_user'] = True
         new_user = User(username = resp['screen_name'])     # FIXME to ask the user for more information if it's their first time.
         db.session.add(new_user)
         db.session.commit()

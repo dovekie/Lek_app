@@ -17,12 +17,13 @@
 </head>
 
 <body>
+<div id='new-user' {% if 'new_user' in session.keys() %} name='{{session['new_user']}}' {% else %} name='False'{% endif %} hidden></div>
 
   <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
           <div class="navbar-header">
               <!-- <img src="/static/logo.png"> --> <!-- logo to be added later -->
-              <a class="navbar-brand" href="/">Lek: Your Life List in the Cloud</a>
+              <a class="navbar-brand" href="/">Lek: Your Life List</a>
           </div>
 
           <div class="navbar-collapse collapse">

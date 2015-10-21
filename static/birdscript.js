@@ -183,11 +183,10 @@ $( document ).ready( function() {
 					console.log($(bird_id).html());
 					console.log($(bird_id).children('a'));
 					$(bird_id).children('a').replaceWith(bird_gallery_data.uri);
-					//console.log("CHILDREN:" + $("#" + bird_gallery_data.id).children().attr('href'));//.replaceWith(bird_gallery_data.uri);
-					// console.log(bird_gallery_data.uri);
+
+					// hands down the gnarliest piece of javascript I've ever written. For posterity.
 					// $("#" + bird_gallery_data.id).prepend(bird_gallery_data.uri);
 					// $("#" + bird_gallery_data.id).children('div').children('h3').text(speciesName);
-					// hands down the gnarliest piece of javascript I've ever written. For posterity.
 					// $("#" + bird_gallery_data.id).children('div').children('h3').text($("#" + bird_gallery_data.id).children('a').attr('title'));
 				}
 			});
@@ -215,6 +214,16 @@ $( document ).ready( function () {
 			});
 		$( "#"+modal_id ).modal();
 	});
+});
+
+$( document ).ready( function() {
+	console.log("I'm going to spot new users and show them a modal window.");
+	var isNew = $( "#new-user" );
+	if(isNew.attr("name") === "True") {
+		console.log("I spotted a new user!");
+	} else {
+		console.log("No new user spotted. :(");
+	}
 });
 
 // Searching!
