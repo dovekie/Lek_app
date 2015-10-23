@@ -29,27 +29,36 @@
         <h4 class="modal-title">Hello! Welcome to Lek</h4>
       </div>
       <div class="modal-body">
-        <p>Would you like to add some information to your account?</p>
-        <p>(You can always add or change this information later)</p>
-        <button type="button" class="btn btn-default" data-dismiss="modal">No, thank you</button>
+	    <div>
+	        <p>Would you like to add some information to your account?</p>
+	        <p>(You can always add or change this information later)</p>
+	        <p></p>
+	    </div>
+        <button id="no-thanks" type="button" class="btn btn-primary" data-dismiss="modal">No, thank you</button>
     		<form class="form-signup" action="signup" method="POST">
 		        <div class="form-group">
-		            <label for="username-field" class="sr-only">username</label>
+		        	<p>Add a custom screen name:</p>
+		            <label for="username-field" class="sr-only">New Username</label>
 		            <input id="username-field"
 		            	   type="text"
 		                   name="username"
 		                   class="form-control input-lg"
-		                   placeholder="Username">
+		                   placeholder="Username"
+		                   default="{{session.username}}">
 		        </div>
 		        <div class="form-group">
-		            <label for="email-field" class="sr-only">Email Address</label>
+		        	<p>Add an email address:</p>
+		            <label for="email-field" class="sr-only">Email Address:</label>
 		            <input id="email-field"
 		            	   type="email"
 		                   name="email"
 		                   class="form-control input-lg"
-		                   placeholder="Email Address">
+		                   placeholder="Email Address"
+		                   {% if 'email' in session.keys() %}
+		                   default="{{session.email}}"
+		                   {% endif %}>
 		        </div>
-        		<button id="user-data-button" type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
+        		<button id="user-data-button" type="button" class="btn btn-info" data-dismiss="modal">Submit</button>
 		    </form>
       </div>
       <div class="modal-footer">

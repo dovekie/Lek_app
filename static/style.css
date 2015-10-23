@@ -63,9 +63,24 @@ h3.subtitle {
 	text-shadow: 4px 4px 6px #3668A5;
 }
 
+.modal-body {
+	font-family: 'PT Sans', sans-serif;
+
+}
+
+.h4, h4 {
+	font-size: 200%;
+	font-family: 'Philosopher', sans-serif;
+}
+
 .taxon_order {
 	font-size: 35px;
 	font-style: bold;
+}
+
+#no-thanks {
+	font-style: bold;
+	margin-bottom: 1em;
 }
 
 .taxon_family {
@@ -120,7 +135,6 @@ span.species_info .glyphicon {
 	padding-top: 20px;
 	padding-bottom: 10px;
 	padding-left: 3em;
-	/*height: 100%;*/
 	background-color: #3668A5;
 	color: #EBEBEB;
 	font-family: 'Philosopher', sans-serif;

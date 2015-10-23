@@ -93,7 +93,9 @@ def index():
     spuh = SPUH_EQUIVALENTS
 
     # if the user is logged in, this will return their ID
-    this_user_id = session.get('user_id', None)                               
+    this_user_id = session.get('user_id', None)
+    if this_user_id == 9:
+        session["new_user"] = True                        
 
     # If the user is not logged in, call birdsearch with no arguments
     # Display the default: all birds.
@@ -102,7 +104,6 @@ def index():
     if this_user_id is None:
         print "Homepage rendering with no user default: User not logged in."
         session.clear()
-        session['new_user'] = True
         bird_dict = birdsearch()
     else:
         # Database query
@@ -528,57 +529,54 @@ def oauth_authorized(resp):
         resp['oauth_token_secret']
     )
     
+    print resp
+
     # Look for a user whose username matches the screen name from the Twitter response.
-    user_object = User.query.filter(User.username == resp['screen_name']).first()
+    user_object = User.query.filter(User.twitter_name == resp['screen_name']).first()
 
     # If no users matches, add this new user to the database.
     if user_object is None:
         session['new_user'] = True
-        new_user = User(username = resp['screen_name'])     # FIXME to ask the user for more information if it's their first time.
+        new_user = User(twitter_name = resp['screen_name'],
+                        twitter_id = resp['user_id'],
+                        display_name = resp['screen_name'],
+                        auth_token = resp['oauth_token'],
+                        auth_secret = resp['oauth_token_secret'],
+                        )
         db.session.add(new_user)
         db.session.commit()
-        user_object = User.query.filter(User.username == resp['screen_name']).first()
-
-    user_id_input = user_object.user_id
+        user_object = User.query.filter(User.twitter_name == resp['screen_name']).first() # might be a better way to select a user.
 
     # Add username and user id to the session.
-    session['username'] = resp['screen_name']
-    session['user_id']  = user_id_input
+    session['username'] = user_object.display_name
+    session['email'] = user_object.email
+    session['user_id']  = user_object.user_id
     print session
 
     flash('You were signed in as %s' % session['username'])
     return redirect(next_url)
 
-# @app.route('/signup', methods=["GET"])
-# def show_signup():
-#     """
-#     Render the signup page
-#     """
-
-#     return render_template("signup.html")
-
-@app.route('/signup', methods=["POST"])
+@app.route('/user_details', methods=["POST"])
 def process_signup():
     """
-    Get the user's name, password, and email.
-    Add them to the database
-    Then send them to the homepage and make them log in.
+    Get the user's name and email.
+    Update the database.
     """
+    user_object = User.query.filter(User.user_id == session['user_id']).first()
+    new_username = request.form.get('new_display_name')
+    new_email = request.form.get('new_email')
 
-    username = request.form.get("username")
-    email = request.form.get("email")
+    user_object.display_name = new_username
+    user_object.email = new_email
+    db.session.commit()
 
-    print "I'm the signup form!", username, email
-                                            
-    # new_user = User(username=username,      # create a User object
-    #                 password=password,
-    #                 email=email,
-    #                 bird_count=0)
-    # db.session.add(new_user)                # add the new user to the database
-    # db.session.commit()
-    
+    print "I'm the user details form!", new_username, new_email
 
-    return None # redirect? Shouldn't need redirect.
+    session['username'] = new_username
+    session['email'] = new_email
+    session['new_user'] = False
+
+    return jsonify({})
 
 @app.route('/logout')
 def logout():

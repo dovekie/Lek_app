@@ -13,20 +13,21 @@ db = SQLAlchemy()
 ##############################################################################
 # Model definitions
 
-class User(db.Model):            # add UserMixin for oauth
+class User(db.Model):
     """User of the birdwatch website"""
 
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    username = db.Column(db.String(64), nullable=False, unique=True)
+    twitter_name = db.Column(db.String(100), nullable=False, unique=True)
+    twitter_id = db.Column(db.String(100), nullable=False)
+    display_name = db.Column(db.String(100), nullable=True)
+    auth_token = db.Column(db.String(100), nullable=False)
+    auth_secret = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(64), nullable=True, unique=True)
-    password = db.Column(db.String(64), nullable=True)
     bird_count = db.Column(db.Integer, nullable=True)
 
     #location = db.Column(db.String(15), nullable=True)
-
-    #UniqueConstraint('username', 'email', name='unique_user') # FIXME
 
     def __repr__(self):
         """Provide helpful information representation when printed!"""
@@ -67,7 +68,6 @@ class Observation(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     bird_id = db.Column(db.Integer, db.ForeignKey('birds.taxon_id'), nullable=False)
     obs_timestamp = db.Column(db.Integer, nullable=False)
-    #location = db.Column(something)
 
     # Define relationship to users
     user = db.relationship("User", backref=db.backref("observations", order_by=Bird.taxon_id))

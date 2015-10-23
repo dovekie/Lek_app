@@ -51,7 +51,7 @@
                   </li>
                   {% if 'username' in session.keys() %}
                   <li class="dropdown hoverable">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome, {{session["username"]}}
+                      <a href="#" id="display-name" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome, {{session["username"]}}
                         <span class="caret"></span>
                       </a>
                       <ul class="dropdown-menu" >
@@ -71,9 +71,6 @@
                   </li>
 
                   {% else %}
-                  <li>
-                      <a href="/lek_login">Log In</a>
-                  </li>
                   <li>
                       <a href="/login">Log In with Twitter</a>
                   </li>

@@ -124,8 +124,6 @@ $( document ).ready( function() {
 		    console.log("not saved");
 		}
 
-
-
 		if( document.getElementById('isDefaultChecked').checked ) {
 		    console.log( "A new default!" );
 
@@ -222,8 +220,9 @@ $( document ).ready( function() {
 	if(isNew.attr("name") === "True") {
 		console.log("I spotted a new user!");
 		$( "#newUserDialog").modal();
+		isNew.attr("name", "False");
 	} else {
-		console.log("No new user spotted. :(");
+		console.log("No new user spotted");
 	}
 });
 
@@ -233,6 +232,14 @@ $( document ).ready( function() {
 		evt.preventDefault();
 		console.log($( "#username-field" ).val());
 		console.log($( "#email-field" ).val());
+
+		var newDisplayName = $( "#username-field" ).val()
+		$.post( '/user_details', 
+				{'new_display_name': $( "#username-field" ).val(), 'new_email': $( "#email-field" ).val()}, 
+				function(response) {
+					$("#display-name").html("Welcome, " + newDisplayName + " <span class='caret'></span>");
+				}
+			);
 	});
 
 });
