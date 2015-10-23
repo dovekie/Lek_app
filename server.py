@@ -8,7 +8,7 @@ from json import dumps, loads
 import requests
 from flask_oauth import OAuth
 import os
-import python-twitter
+import twitter
 from constants import *
 from datetime import datetime
 
