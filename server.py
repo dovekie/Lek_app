@@ -2,7 +2,7 @@
 
 # Imports from Python libraries
 from jinja2 import StrictUndefined
-from flask import Flask, render_template, redirect, request, flash, session, jsonify, url_for, g 
+from flask import Flask, render_template, redirect, request, flash, session, jsonify, url_for 
 from flask_debugtoolbar import DebugToolbarExtension
 from json import dumps, loads
 import requests
@@ -20,9 +20,6 @@ import tests
 # Create a Flask instance
 app = Flask(__name__)
 
-# Required to use Flask sessions and the debug toolbar
-app.secret_key = "TINAMOU"
-
 # Make jinja go.
 app.jinja_env.undefined = StrictUndefined
 
@@ -33,9 +30,11 @@ try:
     consumer_secret=os.environ['TWITTER_CONSUMER_SECRET'],
     access_token_key=os.environ['TWITTER_ACCESS_TOKEN_KEY'],
     access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET']
+    # Required to use Flask sessions and the debug toolbar
+    app.secret_key = os.environ['APP_KEY']
 except KeyError:
     from sos import *
-
+    app.secret_key = flask_key
 
 # Connect to the Twitter API
 api = twitter.Api(
@@ -640,7 +639,7 @@ def map():
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
-    app.debug = True
+    app.debug = False
 
     # Connect the Flask app defined at the top of the file
     # To the database defined in model.py

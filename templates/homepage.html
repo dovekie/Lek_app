@@ -44,7 +44,9 @@
 		                   name="username"
 		                   class="form-control input-lg"
 		                   placeholder="Username"
-		                   default="{{session.username}}">
+		                   {% if 'username' in session.keys() %}
+		                   default="{{session.username}}"
+		                   {% endif %}>
 		        </div>
 		        <div class="form-group">
 		        	<p>Add an email address:</p>
