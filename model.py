@@ -103,11 +103,11 @@ class UserSearch(db.Model):
 # Helper functions
 # import login string
 
-try:
+# try:
     import os
-    db_login = os.environ['DATABASE_URL']
-except KeyError:
-    from sos import db_login
+    db_login = os.environ['BIRDWATCH_DB_URL']
+# except KeyError:
+#     from sos import db_login
 
 
 def connect_to_db(app):
