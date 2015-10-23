@@ -1,6 +1,7 @@
 """Models and database functions """
 
 from flask_sqlalchemy import SQLAlchemy
+import os
 # from flask.ext.login import LoginManager, UserMixin # the last two are intended to make oauth work
 
 # This is the connection to the SQLite database; we're getting this through
@@ -104,8 +105,8 @@ class UserSearch(db.Model):
 # import login string
 
 # try:
-    import os
-    db_login = os.environ['BIRDWATCH_DB_URL']
+
+db_login = os.environ.get('BIRDWATCH_DB_URL')
 # except KeyError:
 #     from sos import db_login
 
