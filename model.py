@@ -105,7 +105,7 @@ class UserSearch(db.Model):
 
 try:
     import os
-    db_login = os.environ['DB_LOGIN']
+    db_login = os.environ['DATABASE_URL']
 except KeyError:
     from sos import db_login
 
