@@ -102,7 +102,13 @@ class UserSearch(db.Model):
 ##############################################################################
 # Helper functions
 # import login string
-from sos import db_login
+
+try:
+    import os
+    db_login = os.environ['DB_LOGIN']
+except KeyError:
+    from sos import db_login
+
 
 def connect_to_db(app):
     """Connect the database to our Flask app."""
