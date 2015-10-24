@@ -11,11 +11,11 @@ def load_birds():
 
     """
     # These two lines get the full ebird json. commented out for testing purposes.
-    # ebird_response = requests.get("http://ebird.org/ws1.1/ref/taxa/ebird?cat=species&fmt=json&locale=en_US")
-    # json_birds = ebird_response.json()
+    ebird_response = requests.get("http://ebird.org/ws1.1/ref/taxa/ebird?cat=species&fmt=json&locale=en_US")
+    json_birds = ebird_response.json()
 
-    bird_string = open("tests/ebird_complete.json").read() # these two lines are fake ebird input for testing
-    json_birds = json.loads(bird_string)
+    # bird_string = open("tests/ebird_complete.json").read() # these two lines are fake ebird input for testing
+    # json_birds = json.loads(bird_string)
 
     ebirds = {}
 
@@ -26,12 +26,12 @@ def load_birds():
         ebirds[binom] = (bird_id, common_name)
 
     # These two lines get the full faircloth json. commented out for testing purposes.
-    # faircloth_response = requests.get("http://birds.faircloth-lab.org/api/v1/species/?offset=0&limit=20000")
-    # faircloth_birds = faircloth_response.json()
+    faircloth_response = requests.get("http://birds.faircloth-lab.org/api/v1/species/?offset=0&limit=20000")
+    faircloth_birds = faircloth_response.json()
 
-    faircloth_string = open("tests/faircloth_complete.json").read() # similar to above; fake faircloth input for testing
-    faircloth_data = json.loads(faircloth_string)
-    faircloth_birds = faircloth_data["records"]
+    # faircloth_string = open("tests/faircloth_complete.json").read() # similar to above; fake faircloth input for testing
+    # faircloth_data = json.loads(faircloth_string)
+    # faircloth_birds = faircloth_data["records"]
 
 
     # match the faircloth data to the ebird data, and use both to create a new row in the birds table.
