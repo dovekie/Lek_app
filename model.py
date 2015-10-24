@@ -67,7 +67,7 @@ class Observation(db.Model):
 
     obs_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    bird_id = db.Column(db.Integer, db.ForeignKey('birds.taxon_id'), nullable=False)
+    bird_id = db.Column(db.String(100), db.ForeignKey('birds.taxon_id'), nullable=False)
     obs_timestamp = db.Column(db.Integer, nullable=False)
 
     # Define relationship to users
