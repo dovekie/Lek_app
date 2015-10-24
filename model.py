@@ -41,18 +41,18 @@ class Bird(db.Model):
 
     __tablename__ = "birds"
 
-    taxon_id = db.Column(db.String(100), primary_key=True)
-    common_name = db.Column(db.String(100), nullable=True)
-    sci_name = db.Column(db.String(100), nullable=False)
-    sp_species = db.Column(db.String(100), nullable=False)
-    sp_genus = db.Column(db.String(100), nullable=False) 
-    sp_family = db.Column(db.String(100), nullable=False)
-    sp_order = db.Column(db.String(100), nullable=False)
+    taxon_id = db.Column(db.Text, primary_key=True)
+    common_name = db.Column(db.Text, nullable=True)
+    sci_name = db.Column(db.Text, nullable=False)
+    sp_species = db.Column(db.Text, nullable=False)
+    sp_genus = db.Column(db.Text, nullable=False) 
+    sp_family = db.Column(db.Text, nullable=False)
+    sp_order = db.Column(db.Text, nullable=False)
     
     #location data follows. Some of these beeps might not have any!
-    region = db.Column(db.String(100), nullable=True)
-    subregion = db.Column(db.String(100), nullable=True)
-    nonbreeding_region = db.Column(db.String(100), nullable=True)
+    region = db.Column(db.Text, nullable=True)
+    subregion = db.Column(db.Text, nullable=True)
+    nonbreeding_region = db.Column(db.Text, nullable=True)
 
 
     def __repr__(self):
@@ -67,7 +67,7 @@ class Observation(db.Model):
 
     obs_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    bird_id = db.Column(db.String(100), db.ForeignKey('birds.taxon_id'), nullable=False)
+    bird_id = db.Column(db.Text, db.ForeignKey('birds.taxon_id'), nullable=False)
     obs_timestamp = db.Column(db.Integer, nullable=False)
 
     # Define relationship to users
