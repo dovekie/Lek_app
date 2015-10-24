@@ -27,11 +27,11 @@ def load_birds():
 
     # These two lines get the full faircloth json. commented out for testing purposes.
     faircloth_response = requests.get("http://birds.faircloth-lab.org/api/v1/species/?offset=0&limit=20000")
-    faircloth_birds = faircloth_response.json()
+    faircloth_data = faircloth_response.json()
 
     # faircloth_string = open("tests/faircloth_complete.json").read() # similar to above; fake faircloth input for testing
     # faircloth_data = json.loads(faircloth_string)
-    # faircloth_birds = faircloth_data["records"]
+    faircloth_birds = faircloth_data["records"]
 
 
     # match the faircloth data to the ebird data, and use both to create a new row in the birds table.
