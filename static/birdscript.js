@@ -197,27 +197,27 @@ $( document ).ready( function () {
 		var modal_id = $( this ).parent( 'div' ).children( '.species_span' ).attr( 'id' ) + "_modal";
 		
 		$("#"+modal_id+"_body").html('');
-		$("#"+modal_id+"_modal").addClass("modal fade");
+		$("#"+modal_id).addClass("modal fade");
 
 
 		$.get('/bird_pictures', {'bird_id': $(this).parent('div').children('.species_span').attr('id')}, function(response) {
 			bird_gallery_data = JSON.parse(response);
 
 			console.log(bird_gallery_data);
-			$("#"+modal_id+"_modal").append('<div class="modal-dialog">
+			$("#"+modal_id).append('<div class="modal-dialog">
 				<div class="modal-content">
 				  <div class="modal-header">
 				    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				    <h4 class="modal-title"><span class="modal-common-name">{{birds_nest[order][family][bird]['common_name']}}</span></h4>
-				    <div class="modal-bird-info"><span class="modal-sci-name sci_name_span">({{ birds_nest[order][family][bird]['sci_name'] }})</span>
-				    	<div class="modal-range">Region codes: {{ birds_nest[order][family][bird]['region'] }}</div></div>
+				    <h4 class="modal-title"><span class="modal-common-name">TEST BIRD</span></h4>
+				    <div class="modal-bird-info"><span class="modal-sci-name sci_name_span">(TEST BIRD)</span>
+				    	<div class="modal-range">Region codes: TEST BIRD</div></div>
 				  </div>
-				  <div class="modal-body" id="{{bird}}_modal_body">
+				  <div class="modal-body" id="' + modal_id + '_body">
 				  </div>
 				  <div class="modal-footer">
 				    <button type="button" class="btn btn-default" data-dismiss="modal">Close Window</button>
-				    <button type="button" class="btn btn-primary add-bird" id="{{bird}}" data-taxon-id="{{birds_nest[order][family][bird]['common_name']}}">Add This Bird</button>
-				    <a class="btn twitter-share-button" id="tweet-{{bird}}">Tweet This Bird</a> 
+				    <button type="button" class="btn btn-primary add-bird" id="TEST BIRD" data-taxon-id="TEST BIRD">Add This Bird</button>
+				    <a class="btn twitter-share-button" id="tweet-TEST BIRD">Tweet This Bird</a> 
 				  </div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->');
