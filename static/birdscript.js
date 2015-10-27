@@ -197,6 +197,7 @@ $( document ).ready( function () {
 		var modal_id = $( this ).parent( 'div' ).children( '.species_span' ).attr( 'id' ) + "_modal";
 		
 		$("#"+modal_id+"_body").html('');
+		$("#"+modal_id+"_body").addClass("modal fade");
 
 
 		$.get('/bird_pictures', {'bird_id': $(this).parent('div').children('.species_span').attr('id')}, function(response) {
