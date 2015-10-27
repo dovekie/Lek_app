@@ -1,5 +1,13 @@
-# import unittest
-# from bs4 import BeautifulSoup
+import unittest
+from bs4 import BeautifulSoup
+from selenium import webdriver
+
+class LekHomepageTest(unittest.TestCase):
+ 
+    @classmethod
+    def setUpClass(cls):
+        cls.driver = webdriver.Firefox()
+        cls.driver.get('https://lek.heroku.com')
 
 # import server
 # from model import connect_to_db

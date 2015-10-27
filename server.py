@@ -15,7 +15,7 @@ from datetime import datetime
 # Imports from local scripts
 from model import User, Bird, Observation, UserSearch, connect_to_db, db
 from searchbirds import birdsearch
-import tests
+#import tests
 
 # Create a Flask instance
 app = Flask(__name__)
@@ -639,7 +639,7 @@ def map():
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
-    app.debug = False
+    app.debug = True
 
     # Connect the Flask app defined at the top of the file
     # To the database defined in model.py
@@ -651,4 +651,4 @@ if __name__ == "__main__":
     # Run.
     PORT = int(os.environ.get("PORT", 5000))
 
-    app.run(debug=False, host="0.0.0.0", port=PORT)
+    app.run(debug=True, host="0.0.0.0", port=PORT)

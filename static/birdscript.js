@@ -181,12 +181,7 @@ $( document ).ready( function() {
 					console.log($(bird_id).html());
 					console.log($(bird_id).children('a'));
 					$(bird_id).children('a').replaceWith(bird_gallery_data.uri);
-
-					// hands down the gnarliest piece of javascript I've ever written. For posterity.
-					// $("#" + bird_gallery_data.id).prepend(bird_gallery_data.uri);
-					// $("#" + bird_gallery_data.id).children('div').children('h3').text(speciesName);
-					// $("#" + bird_gallery_data.id).children('div').children('h3').text($("#" + bird_gallery_data.id).children('a').attr('title'));
-				}
+					}
 			});
 		});
 
@@ -200,16 +195,18 @@ $( document ).ready( function () {
 		console.log( $( this ).parent( 'div' ).children( '.species_span' ).attr( 'id' ));
 
 		var modal_id = $( this ).parent( 'div' ).children( '.species_span' ).attr( 'id' ) + "_modal";
+		
 		$("#"+modal_id+"_body").html('');
 
 
-			$.get('/bird_pictures', {'bird_id': $(this).parent('div').children('.species_span').attr('id')}, function(response) {
-				bird_gallery_data = JSON.parse(response);
+		$.get('/bird_pictures', {'bird_id': $(this).parent('div').children('.species_span').attr('id')}, function(response) {
+			bird_gallery_data = JSON.parse(response);
 
-				console.log(bird_gallery_data);
+			console.log(bird_gallery_data);
 
-				$("#"+modal_id+"_body").append(bird_gallery_data.uri);
-			});
+			$("#"+modal_id+"_body").append(bird_gallery_data.uri);
+		});
+
 		$( "#"+modal_id ).modal();
 	});
 });

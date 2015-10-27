@@ -105,7 +105,6 @@ class UserSearch(db.Model):
 # import login string
 
 # try:
-
 db_login = os.environ.get('BIRDWATCH_DB_URL')
 # except KeyError:
 #     from sos import db_login
