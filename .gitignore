@@ -9,3 +9,7 @@ project/
 bootstrap.css
 jquery.js
 *.ini
+modal_guts.html
+page_source.txt
+templates/homepage-old.html
+test_output*

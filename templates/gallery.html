@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block body %}
-
+    <script>
+      var sp_orders = {{ orders|tojson }};
+    </script>
 <div class="container" id="gallery">
 	<div class="row" id="gallery-row">
 	{% for this_bird, bird_info in bird_ids.iteritems() %}

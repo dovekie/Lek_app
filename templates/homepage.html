@@ -5,7 +5,11 @@
 {% endblock %}
 
 {% block body %}
-
+    <script>
+      var sp_orders = {{ orders|tojson }};
+      var all_taxons = {{ all_taxons|tojson }};
+      var birds_nest = {{ birds_nest|tojson }};
+    </script>
 <div class="jumbotron">
 	<div class="container">
 		<h1 class="title">Lek</h1>
@@ -74,31 +78,8 @@
 <h3>No birds found. <a href="/search">Search again?</a></h3>
 {% else %}
 <div class="instructions">Click on a bird's name to add it to your life list.<br>Click <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> for more information about a species.</div>
-	{% for order in orders %}
-		<div class="taxon_order" id="{{order}}">{{ order }} <span class="spuh">({{ spuh[order] }})</span>
-		{% for family in birds_nest[order].keys() %}
-			<div class="taxon_family" id="{{family}}">{{family}}
-				<ul>
-					{% for bird in birds_nest[order][family].keys() %}
-							<div class="taxon_species">
-								<span class="species_span" id="{{bird}}">
-									<span class="common_name_span">{{ birds_nest[order][family][bird]['common_name'] }}</span>: 
-									<span class="sci_name_span">{{ birds_nest[order][family][bird]['sci_name'] }}</span>
-								</span>
-								<span class="species_info"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></span>
-
-								<div id="{{bird}}_modal">
-
-								</div><!-- /.modal -->
-
-							</div>
-					{% endfor %}
-				</ul>
-			</div>
-				
-		{% endfor %}
-		</div>
-	{% endfor %}
+	<div id="bird-list">
+	</div>
 {% endif %}
 </div>
 {% endblock %}

@@ -2,7 +2,15 @@ from model import User, Bird, Observation, connect_to_db, db
 from constants import TAXA_ORDER
 import pprint
 
-def birdsearch(this_user_id = None, bird_limit = "all", spuh = "all", order="all", family = "all", region = "all", other=None):
+def birdsearch(this_user_id = None, 
+			   bird_limit = "all", 
+			   spuh = "all", 
+			   order="all", 
+			   family = "all", 
+			   region = "all", 
+			   other=None, 
+			   display_limit=None, 
+			   offset=None):
 	""" 
 	I take parameters from the server and return a list of orders and a dictionary like so:
 	dict = {order: {family_1: {birdA: {bird: data}, birdB: {bird: data}}}}
@@ -24,6 +32,7 @@ def birdsearch(this_user_id = None, bird_limit = "all", spuh = "all", order="all
 
 	if False in semicolon_test_results:
 		return "Semicolons are not allowed in birdsearch inputs."
+		# This should also throw an error that can be brought forward to the user.
 
 
 	# begin building an SQL query
@@ -62,16 +71,16 @@ def birdsearch(this_user_id = None, bird_limit = "all", spuh = "all", order="all
 		print "region ", region
 		q = q.filter(Bird.region.like('%'+region+'%'))
 
-    # put the final query in order by taxon ID but this doesn't work anymore
-	#q = q.order_by(Bird.taxon_id)
-
 	##### Now the query that has been built is run several times.
 
 	# Run once to get a list of bird objects. This is in order but the order is not maintained.
-	birds = q.order_by(Bird.taxon_id).all()
+	birds = q.limit(display_limit).offset(offset).all()
 
-	# Run once to get a list of family objects
-	#families_objects = q.group_by(Bird.sp_family).with_entities(Bird.sp_family).all()
+	all_taxons = {bird.taxon_id: {'order': bird.order.encode('ascii', 'ignore'), 
+								   'family': bird.family.encode('ascii', 'ignore'), 
+								   'sci_name': bird.sci_name, 'common_name': bird.common_name, 
+								   'region': bird.region}
+				  for bird in birds}
 
 	# Run once to get a list of order objects
 	orders_objects = q.group_by(Bird.sp_order).with_entities(Bird.sp_order).all()
@@ -101,4 +110,5 @@ def birdsearch(this_user_id = None, bird_limit = "all", spuh = "all", order="all
 																												  'region': bird.region}
 
 	return {"birds_dict": birds_dict,
-			"orders" : orders_list}
+			"orders" : orders_list,
+			"all_taxons": all_taxons}
